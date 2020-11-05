@@ -17,7 +17,7 @@ jobs:
     - name: Install dependencies
       run: |
         # $CONDA is an environment variable pointing to the root of the miniconda directory
-        $CONDA/bin/conda env update --file environment.yml --name base
+        $CONDA/bin/conda env update --file environment.yml --name dev
     - name: run python program to read from mongo and train a model
       env: # Or as an environment variable
           DB: ${{ secrets.DB }}
