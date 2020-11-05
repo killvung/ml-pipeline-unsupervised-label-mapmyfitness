@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 import pandas as pd
 from pymongo import MongoClient
 from sklearn.cluster import KMeans
@@ -6,10 +7,7 @@ from sklearn.cluster import KMeans
 # Check if we are on Github actions, if not load env file locally
 # https://docs.github.com/en/free-pro-team@latest/actions/reference/environment-variables
 if os.getenv('CI') == None:
-  # TODO: Resolve module issue then move this above
-  from dotenv import load_dotenv
   load_dotenv()
-
 def _connect_mongo(host, port, username, password, db):
     """ A util for making a connection to mongo """
 

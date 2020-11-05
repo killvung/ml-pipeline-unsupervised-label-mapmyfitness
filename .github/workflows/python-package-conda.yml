@@ -27,4 +27,4 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
       run: |
-        python run.py
+        python3 run.py
