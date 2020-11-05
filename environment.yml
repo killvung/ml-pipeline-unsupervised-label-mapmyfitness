@@ -39,4 +39,6 @@ dependencies:
   - wheel=0.35.1=py_0
   - xz=5.2.5=h1de35cc_0
   - zlib=1.2.11=h1de35cc_3
+  - pip:
+    - python-dotenv==0.15.0
 prefix: /usr/local/anaconda3/envs/dev

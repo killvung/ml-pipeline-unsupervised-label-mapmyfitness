@@ -1,7 +1,13 @@
+import os
+from dotenv import load_dotenv
 import pandas as pd
 from pymongo import MongoClient
 from sklearn.cluster import KMeans
 
+# Check if we are on Github actions, if not load env file locally
+# https://docs.github.com/en/free-pro-team@latest/actions/reference/environment-variables
+if os.getenv('CI') == None:
+  load_dotenv()
 def _connect_mongo(host, port, username, password, db):
     """ A util for making a connection to mongo """
 
@@ -31,14 +37,16 @@ def read_mongo(db, collection, query={}, host='localhost', port=27017, username=
 
     return df
 
-DB = "UnderArmour"
-COLLECTION = "routes"
+# MongoDB options
 QUERY = {}
-HOST = "underarmour.ef9ge.mongodb.net"
-PORT = 27017
-USERNAME = "kiulam"
-PASSWORD = "kiulam"
 NO_ID = True
+
+DB = os.getenv('DB')
+COLLECTION = os.getenv('COLLECTION')
+HOST = os.getenv('HOST')
+PORT = os.getenv('PORT')
+USERNAME = os.getenv('USERNAME')
+PASSWORD = os.getenv('PASSWORD')
 
 df = read_mongo(DB, COLLECTION, QUERY, HOST, PORT, USERNAME, PASSWORD, NO_ID)
 X = df[["distance"]]
