@@ -12,7 +12,7 @@ jobs:
         os: ["ubuntu-latest", "macos-latest", "windows-latest"]
         python-version: ["3.7", "2.7"]
     steps:
-      - uses: conda-incubator/setup-miniconda
+      - uses: conda-incubator/setup-miniconda@v1.7.0
         with:
           activate-environment: base
           environment-file: environment.yml
