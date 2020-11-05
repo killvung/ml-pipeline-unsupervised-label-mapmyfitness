@@ -41,6 +41,7 @@ dependencies:
   - wheel
   - xz
   - zlib
+  - python-dotenv
   - pip:
     - python-dotenv
 prefix: /usr/local/anaconda3/envs/dev
