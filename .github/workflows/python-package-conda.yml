@@ -16,8 +16,8 @@ jobs:
         python-version: 3.8
     - name: Update conda and export
       run: |
-        conda update --all
-        conda export --no-builds > environment.yml
+        $CONDA/bin/conda update --all
+        $CONDA/bin/conda export --no-builds > environment.yml
     - name: Install dependencies
       run: |
         # $CONDA is an environment variable pointing to the root of the miniconda directory
