@@ -17,7 +17,6 @@ jobs:
     - name: Update conda and export
       run: |
         $CONDA/bin/conda update --all
-        $CONDA/bin/conda export --no-builds > environment.yml
     - name: Install dependencies
       run: |
         # $CONDA is an environment variable pointing to the root of the miniconda directory
