@@ -17,10 +17,12 @@ jobs:
     - name: Activate conda bash
       run: |
         $CONDA/bin/conda init bash
-    - name: Activate bash
+    - name: Restart bash
       run: |
         eval "$(conda shell.bash hook)"
-        $CONDA/bin/conda activate base
+    - name: Activate conda
+      run: |
+        $CONDA/bin/conda activate base 
     - name: Install dependencies
       run: |
         # $CONDA is an environment variable pointing to the root of the miniconda directory
