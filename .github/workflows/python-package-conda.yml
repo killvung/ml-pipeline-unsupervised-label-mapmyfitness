@@ -17,9 +17,9 @@ jobs:
     - name: Activate conda bash
       run: |
         $CONDA/bin/conda init bash
-    - name: Restart bash
+    - name: Where is bash
       run: |
-        source $CONDA/etc/profile.d/conda.sh
+        $CONDA/bin/conda info | grep -i 'base environment'
     - name: Activate conda
       run: |
         $CONDA/bin/conda activate base 
