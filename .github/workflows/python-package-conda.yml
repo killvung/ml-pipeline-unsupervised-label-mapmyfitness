@@ -19,7 +19,7 @@ jobs:
         $CONDA/bin/conda init bash
     - name: Restart bash
       run: |
-        eval "$(conda shell.bash hook)"
+        source /usr/share/miniconda/etc/profile.d/conda.sh
     - name: Activate conda
       run: |
         $CONDA/bin/conda activate base 
