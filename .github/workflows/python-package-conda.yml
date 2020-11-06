@@ -19,7 +19,7 @@ jobs:
         $CONDA/bin/conda init bash
     - name: Activate bash
       run: |
-        bash
+        exec bash
     - name: Install dependencies
       run: |
         # $CONDA is an environment variable pointing to the root of the miniconda directory
