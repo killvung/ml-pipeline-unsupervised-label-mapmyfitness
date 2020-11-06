@@ -4,33 +4,34 @@ on: [push]
 
 jobs:
   build-linux:
-    name: Ex1 (${{ matrix.python-version }}, ${{ matrix.os }})
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
-      fail-fast: false
-      matrix:
-        os: ["ubuntu-latest"]
-        python-version: ["3.7"]
+      max-parallel: 5
+
     steps:
-      - uses: conda-incubator/setup-miniconda@v1.7.0
-        with:
-          activate-environment: base
-          environment-file: environment.yml 
-          auto-update-conda: true
-          python-version: ${{ matrix.python-version }}
-      - name: Conda info
-        shell: bash
-        run: conda info
-      - name: Conda list
-        shell: bash
-        run: conda list
-      - name: run python program to read from mongo and train a model
-        env: # Or as an environment variable
-            DB: ${{ secrets.DB }}
-            COLLECTION: ${{ secrets.COLLECTION }}
-            HOST: ${{ secrets.HOST }}
-            PORT: ${{ secrets.PORT }}
-            USERNAME: ${{ secrets.USERNAME }}
-            PASSWORD: ${{ secrets.PASSWORD }}
-        run: |
-          python3 run.py
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Activate conda bash
+      run: |
+        $CONDA/bin/conda init bash
+    - name: Activate bash
+      run: |
+        bash
+    - name: Install dependencies
+      run: |
+        # $CONDA is an environment variable pointing to the root of the miniconda directory
+        $CONDA/bin/conda env update --file environment.yml --name base
+        $CONDA/bin/conda activate base
+    - name: run python program to read from mongo and train a model
+      env: # Or as an environment variable
+          DB: ${{ secrets.DB }}
+          COLLECTION: ${{ secrets.COLLECTION }}
+          HOST: ${{ secrets.HOST }}
+          PORT: ${{ secrets.PORT }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+      run: |
+        python3 run.py
